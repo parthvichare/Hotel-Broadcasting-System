@@ -1,0 +1,54 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: my-node-app
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/HotelManagement  # Updated here
+    command: ["nodemon", "server.js"]
+    networks:
+      - app-network
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+    restart: always
+
+  mongo:
+    image: mongo:6.0.7
+    platform: linux/amd64
+    container_name: mongocontainer
+    ports:
+     - "27018:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - app-network
+    restart: always
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]  # You might want to change this as mentioned before
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    build:
+      context: ./frontend/my-app
+      dockerfile: Dockerfile
+    container_name: my-react-app
+    networks:
+      - app-network
+    ports:
+      - "3000:3000"
+    restart: always
+
+volumes:
+  mongo-data:
+
+networks:
+  app-network:
+    name: Hotel_digital_broadcasting
+    driver: bridge
