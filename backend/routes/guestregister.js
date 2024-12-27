@@ -5,7 +5,7 @@ const Hotel = require('../models/hotel');
 
 
 //Register guest with respective hotel
-router.post("/guest", async (req, res) => {
+router.post("/guest-register", async (req, res) => {
     console.log(req.body)
     try {
       const {
@@ -47,7 +47,7 @@ router.post("/guest", async (req, res) => {
     }
   });
 
-//Guest detail with Id
+//Guest detail
 router.get("/guest_info/:id", async(req,res)=>{
   // console.lo
   try{
@@ -58,7 +58,7 @@ router.get("/guest_info/:id", async(req,res)=>{
   }
 })
   
-//
+
 router.patch("/guest_update/:id", async (req, res) => {
     console.log("Hello")
     try {
@@ -81,7 +81,7 @@ router.patch("/guest_update/:id", async (req, res) => {
 
 
 
-router.get("/guestdetail",async(req,res)=>{
+router.get("/guestdetails",async(req,res)=>{
   console.log("Guest details")
   try{
     const allGuest =  await guestregister.find().populate("hotel")

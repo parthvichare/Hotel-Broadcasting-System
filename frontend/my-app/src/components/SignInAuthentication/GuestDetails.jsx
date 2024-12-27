@@ -12,7 +12,7 @@ const GuestDetails = () => {
     const fetchGuestInfo = async () => {
       try {
         const response = await axiosInstance.get(
-          "/guest/guestdetail"
+          "/guest/guestdetails"
         );
         setGuestDetail(response.data);
       } catch (error) {

@@ -25,7 +25,7 @@ const GuestRegister = ({ isRegister, handletoggle }) => {
     const handleGuestSubmission = async (e) => {
         e.preventDefault();
         try {
-            const response = await axiosInstance.post("/guest-register/guest", formData);
+            const response = await axiosInstance.post("/guest/guest-register", formData);
             navigate("/welcomePage");
         } catch (error) {
             console.log(error.message);
