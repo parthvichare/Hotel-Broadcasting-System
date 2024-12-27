@@ -41,8 +41,8 @@ app.get("/", async(req,res)=>{
 })
 
 
-app.use("/admin-register", adminregister)
-app.use("/guest-register", guestregister)
+app.use("/admin", adminregister)
+app.use("/guest", guestregister)
 app.use("/hotel", hotelregister)
 
 

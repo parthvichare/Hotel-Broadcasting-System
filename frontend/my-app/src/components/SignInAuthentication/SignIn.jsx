@@ -14,23 +14,6 @@ const SignIn = ({ socket }) => {
   const [message, setMessage] = useState();
   const navigate = useNavigate(); // Initialize navigate
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axiosInstance.get(`admin-register/api/data/`); // Use id in the API call
-  //       const { message } = response.data;
-  //       setData(message);
-  //     } catch (error) {
-  //       setError(error.response?.data?.error || "Failed to fetch data");
-  //     }
-  //   };
-  //   if (error) {
-  //     // Check if Id is not null before logging
-  //     console.log("Blog");
-  //     fetchData(); // Call fetchData
-  //   }
-  // }, [error]); // Dependency array includes Id
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -43,7 +26,7 @@ const SignIn = ({ socket }) => {
     e.preventDefault();
 
     try {
-      const response = await axiosInstance.post("/admin-register/api/signIn", formData);
+      const response = await axiosInstance.post("/admin/api/signIn", formData);
       const { token, Loginstatus,Admin } = response.data;
       if (!token) {
         setError(error);

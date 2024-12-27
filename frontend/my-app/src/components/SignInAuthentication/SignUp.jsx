@@ -22,7 +22,7 @@ const Signup = () => {
     try {
       // Send form data as JSON
       const response = await axiosInstance.post(
-        "/admin-register/api/signUp",
+        "/admin/api/signUp",
         formData,
         {
           headers: {

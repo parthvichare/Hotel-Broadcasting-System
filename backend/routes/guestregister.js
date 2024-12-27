@@ -4,7 +4,7 @@ const router =  express.Router()
 const Hotel = require('../models/hotel'); 
 
 
-
+//Register guest with respective hotel
 router.post("/guest", async (req, res) => {
     console.log(req.body)
     try {
@@ -47,7 +47,7 @@ router.post("/guest", async (req, res) => {
     }
   });
 
-
+//Guest detail with Id
 router.get("/guest_info/:id", async(req,res)=>{
   // console.lo
   try{
@@ -58,7 +58,7 @@ router.get("/guest_info/:id", async(req,res)=>{
   }
 })
   
-
+//
 router.patch("/guest_update/:id", async (req, res) => {
     console.log("Hello")
     try {

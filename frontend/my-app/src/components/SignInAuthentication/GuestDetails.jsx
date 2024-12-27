@@ -12,7 +12,7 @@ const GuestDetails = () => {
     const fetchGuestInfo = async () => {
       try {
         const response = await axiosInstance.get(
-          "/guest-register/guestdetail"
+          "/guest/guestdetail"
         );
         setGuestDetail(response.data);
       } catch (error) {
@@ -40,7 +40,7 @@ const GuestDetails = () => {
     e.preventDefault(); // Prevent form submission default
     try {
       const response = await axiosInstance.patch(
-        `/guest-register/guest_update/${selectedGuest._id}`,
+        `/guest/guest_update/${selectedGuest._id}`,
         selectedGuest
       );
       setGuestDetail((prevDetails) =>
@@ -57,7 +57,7 @@ const GuestDetails = () => {
 
   const handleDeleteGuest = async (id) => {
     try {
-      await axiosInstance.delete(`/guest-register/guest_delete/${id}`);
+      await axiosInstance.delete(`/guest/guest_delete/${id}`);
       setGuestDetail((prevDetails) =>
         prevDetails.filter((guest) => guest._id !== id)
       );
