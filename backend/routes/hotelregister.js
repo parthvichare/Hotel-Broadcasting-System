@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Hotel = require('../models/hotel'); // Import Hotel model
-const GuestRegistration = require('../models/guestRegistration'); // Import GuestRegistration model
+const Hotel = require('../models/hotel'); 
+const GuestRegistration = require('../models/guestRegistration'); 
 const path = require("path")
 const multer = require("multer")
 const fs = require("fs")
@@ -80,7 +80,6 @@ router.post("/register-hotel", upload.single('logo'), async (req, res) => {
 
 // Route to get a hotel by ID
 router.get("/api/:id", async (req, res) => {
-    console.log("Finding hotel and generating QR code");
     try {
       const hotelId = req.params.id;
       const qrCodeURL = `http://localhost:3000/hotel/${hotelId}`;
@@ -91,7 +90,6 @@ router.get("/api/:id", async (req, res) => {
       // Generate QR Code and save to file
       await QRCode.toFile(qrCodeFilePath, qrCodeURL);
   
-      // Read the QR Code file as Base64
       const qrCodeData = fs.readFileSync(qrCodeFilePath, { encoding: "base64" });
   
       // Update the hotel record in the database with QR code
@@ -120,11 +118,8 @@ router.patch("/:id", async (req, res) => {
         // Extract data from request body
         const { hotelname, address, _id } = req.body;
 
-     // Update the hotel document by ID
         const updatedHotel = await Hotel.findByIdAndUpdate(_id,{ hotelname, address },  { new: true});
-        console.log("pdated",updatedHotel)
 
-      // Return success response
         res.status(200).json({
             message: "Hotel updated successfully",
             data: updatedHotel,

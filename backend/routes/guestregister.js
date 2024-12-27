@@ -1,10 +1,9 @@
 const express = require("express")
 const guestregister = require("../models/guestRegistration")
 const router =  express.Router()
+const Hotel = require('../models/hotel'); 
 
-router.get("/guest", async(req,res)=>{
-    res.send("Hello Admin Route")
-})
+
 
 router.post("/guest", async (req, res) => {
     console.log(req.body)
@@ -35,7 +34,13 @@ router.post("/guest", async (req, res) => {
       };
   
       const registeredGuest = await guestregister.create(registerGuest);
-      res.status(201).json({ message: "Guest registered successfully", data: registeredGuest });
+      console.log(registeredGuest._id)
+      const updatedHotel = await Hotel.findByIdAndUpdate(
+        hotel,
+        { $push: { guests: registeredGuest._id } }, // Add guest ID to the hotel's guests array
+        { new: true } // Return the updated document
+      );
+      res.status(201).json({ message: "Guest registered successfully", data: {registeredGuest,updatedHotel} });
     } catch (error) {
       console.error(error.message);
       res.status(400).json({ message: "Validation failed", error: error.message });
@@ -46,7 +51,7 @@ router.post("/guest", async (req, res) => {
 router.get("/guest_info/:id", async(req,res)=>{
   // console.lo
   try{
-    const guestInfo =  await guestregister.findById( req.params.id)
+    const guestInfo =  await guestregister.findById(req.params.id)
     return res.json(guestInfo)
   }catch(error){
     console.log(error.message)
@@ -79,7 +84,7 @@ router.patch("/guest_update/:id", async (req, res) => {
 router.get("/guestdetail",async(req,res)=>{
   console.log("Guest details")
   try{
-    const allGuest =  await guestregister.find()
+    const allGuest =  await guestregister.find().populate("hotel")
     return res.json(allGuest)
   }catch(error){
     console.log(error.message)

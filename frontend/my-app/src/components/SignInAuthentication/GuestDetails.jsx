@@ -22,6 +22,7 @@ const GuestDetails = () => {
     fetchGuestInfo();
   }, []);
 
+
   const handleEditClick = (guest) => {
     setSelectedGuest(guest); // Set selected guest for editing
     setIsEditModalOpen(true); // Open modal
@@ -48,6 +49,7 @@ const GuestDetails = () => {
         )
       );
       setIsEditModalOpen(false); // Close the modal
+      window.location.reload()
     } catch (error) {
       console.error("Error updating guest:", error.message);
     }

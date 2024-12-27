@@ -41,11 +41,7 @@ const HotelRegister = () => {
       const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axiosInstance.post('/hotel/register-hotel', formData, {
-                headers: {
-                    'Content-Type': 'application/json', // Ensure the content type is set to JSON
-                },
-            });
+            const response = await axiosInstance.post('/hotel/register-hotel', formData);
             const{_id} =  await response.data.hotel
             console.log(response.data); // Log the response from the server
             navigate(`/hotel/${_id}`)
@@ -105,14 +101,6 @@ const HotelRegister = () => {
               <span className="text-gray-50">Sign Up</span>
             </button>
           </form>
-          <div className="text-1xl mx-24 font-bold m:ml-4">
-            <p className="mb-4 flex justify-center m:ml-14 laptop:ml-20">
-              Already Have An account
-            </p>
-            <a className="m:flex m:justify-center m:ml-8 s:ml-10" href="/user/signIn">
-              <span className="font-bold cursor-pointer laptop-l:ml-14">LogIn</span>
-            </a>
-          </div>
         </div>
       </div>
     </div>

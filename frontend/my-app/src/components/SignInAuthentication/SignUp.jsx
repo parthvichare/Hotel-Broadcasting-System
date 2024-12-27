@@ -119,19 +119,6 @@ const Signup = () => {
               <span class="text-gray-50">Sign Up</span>
             </button>
           </form>
-          <div className="text-1xl mx-24 font-bold m:ml-4">
-            <p className="mb-4 flex justify-center m:ml-14 laptop:ml-20">
-              Already Have An account
-            </p>
-            <a
-              class="m:flex m:justify-center m:ml-8 s:ml-10"
-              href="/user/signIn"
-            >
-              <span className="font-bold cursor-pointe laptop-l:ml-14">
-                LogIn
-              </span>
-            </a>
-          </div>
         </div>
       </div>
     </div>
