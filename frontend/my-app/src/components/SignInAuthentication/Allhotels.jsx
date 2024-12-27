@@ -17,12 +17,11 @@ const Allhotels = () => {
   }, []);
 
   const mappedhotels = allhotels.map((hotel) => {
-    // Ensure hotel.hotelQRCode exists before trying to access it
     const qrCodeSrc = hotel.hotelQRCODE && typeof hotel.hotelQRCODE === 'string' 
       ? hotel.hotelQRCODE.startsWith("data:image/")
         ? hotel.hotelQRCODE
         : `data:image/png;base64,${hotel.hotelQRCODE}`
-      : ''; // Fallback to an empty string if undefined or not a string
+      : ''; 
   
     return {
       id: hotel._id,
@@ -36,12 +35,12 @@ const Allhotels = () => {
   return (
     <div>
       {mappedhotels.map((item) => (
-        <div key={item.id}>
+        <div key={item.id} className="flex flex-row justify-center items-center mb-10">
           <a href={`/hotel/${item.id}`}>
           <h1>{item.name}</h1>
           </a>
           {item.qrCodeSrc ? (
-            <img src={item.qrCodeSrc} alt={`QR Code for ${item.name}`} />
+            <img src={item.qrCodeSrc} alt={`QR Code for ${item.name}`}  className="w-52"/>
           ) : (
             <p>No QR code available</p>
           )}
